@@ -35,3 +35,20 @@ class Lesson(models.Model):
         verbose_name='урок'
         verbose_name_plural='уроки'
         ordering = ('name',)
+
+
+class Payment(models.Model):
+    """Модель описывающий - Платеж"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь', **NULLABLE)
+    date_payment = models.DateField(auto_now_add=True, verbose_name='Дата оплаты')
+    paid_course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='оплаченный курс', **NULLABLE)
+    payment_amount = models.IntegerField(verbose_name='сумма оплаты')
+    payment_method = models.CharField(verbose_name='способ оплаты', **NULLABLE) # наличные или перевод на счет.
+    is_paid = models.BooleanField(default=False, verbose_name='Оплачено')
+
+    def __str__(self):
+        return f'{self.user} {self.date_payment} {self.paid_course} {self.payment_amount}'
+
+    class Meta:
+        verbose_name = 'оплата'
+        verbose_name_plural = 'оплаты'
