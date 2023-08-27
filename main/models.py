@@ -5,7 +5,9 @@ from config import settings
 NULLABLE = {'blank': True, 'null': True}
 
 class Course (models.Model):
-    """Класс модель - Курс"""
+    """
+    Класс модель - Курс
+    """
     name = models.CharField(max_length=200, verbose_name='Название')
     preview = models.ImageField(upload_to='main/course/', verbose_name='Превью', **NULLABLE)
     description = models.TextField(verbose_name='Описание', **NULLABLE)
@@ -20,7 +22,9 @@ class Course (models.Model):
         ordering = ('name',)
 
 class Lesson(models.Model):
-    """Модель описывающее - Урок"""
+    """
+    Модель описывающее - Урок
+    """
     name = models.CharField(max_length=150, verbose_name='Название')
     description = models.TextField(verbose_name='Описание', **NULLABLE)
     image = models.ImageField(upload_to='main/lesson/', verbose_name='Превью', **NULLABLE)
@@ -39,7 +43,9 @@ class Lesson(models.Model):
 
 
 class Payment(models.Model):
-    """Модель описывающий - Платеж"""
+    """
+    Модель для способа оплаты курса или урока
+    """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь', **NULLABLE)
     date_payment = models.DateField(auto_now_add=True, verbose_name='Дата оплаты')
     paid_course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='оплаченный курс', **NULLABLE)
@@ -47,13 +53,16 @@ class Payment(models.Model):
     payment_method = models.CharField(verbose_name='способ оплаты', **NULLABLE) # наличные или перевод на счет.
     is_paid = models.BooleanField(default=False, verbose_name='Оплачено')
 
+    id_intent = models.CharField(max_length=300, verbose_name='id_намерение платежа', **NULLABLE)
+    id_method = models.CharField(max_length=300, verbose_name='id_метод платежа', **NULLABLE)
+    status = models.CharField(max_length=50, verbose_name='статус платежа', **NULLABLE)
+
     def __str__(self):
         return f'{self.user} {self.date_payment} {self.paid_course} {self.payment_amount}'
 
     class Meta:
         verbose_name = 'оплата'
         verbose_name_plural = 'оплаты'
-
 
 class Subscription(models.Model):
     """
