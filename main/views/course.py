@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
 from main.models import Course
+from main.paginators import MainPaginator
 from main.permissions import IsModerator, IsOwner
 from main.seriallizers.course import CourseSerializer
 
@@ -21,3 +22,4 @@ class CourseViewSet(viewsets.mixins.CreateModelMixin,
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
     permission_classes = [IsModerator | IsOwner]
+    pagination_class = MainPaginator

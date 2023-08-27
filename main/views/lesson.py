@@ -3,6 +3,7 @@ from rest_framework import filters
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 
 from main.models import Lesson
+from main.paginators import MainPaginator
 from main.seriallizers.lesson import LessonSerializer
 from main.permissions import IsOwner, IsModerator
 
@@ -31,6 +32,7 @@ class LessonListAPIView(ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator | IsOwner]
+    pagination_class = MainPaginator
 
     # фильтр поиска урока
     filter_backends = [filters.SearchFilter]
