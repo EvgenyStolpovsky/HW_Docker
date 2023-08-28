@@ -2,5 +2,9 @@ Django
 djangorestframework
 Pillow
 psycopg2
+celery
+redis
+django_celery_beat
+eventlet
 
 
