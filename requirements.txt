@@ -1,10 +1,17 @@
 Django
 djangorestframework
 Pillow
-psycopg2
+psycopg2-binary
+pytz
+django-filter
+djangorestframework-simplejwt
+drf-yasg
+requests
 celery
-redis
 django_celery_beat
 eventlet
+redis
+stripe
+gunicorn
 
 

@@ -1,13 +1,10 @@
 FROM python:3.11-slim-buster
-#Debian GNU/Linux 10, python без компилятора
 
-WORKDIR /Skypro.Homework.DRF
-#рабочая директория, название проекта
+WORKDIR /HW_Django_DRF
 
-COPY ./requirements.txt /Skypro.Homework.DRF/
+
+COPY ./requirements.txt /HW_Django_DRF/
 
 RUN pip install -r requirements.txt
 
 COPY . .
-
-#CMD ["python", "manage.py", "runserver"]
